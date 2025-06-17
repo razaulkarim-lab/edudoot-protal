@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-container">
+  <h2>Edit Profile</h2>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" id="editName" placeholder="Your name" />
+  </div>
+  <div class="form-group">
+    <label for="mobile">Mobile Number</label>
+    <input type="tel" id="editMobile" placeholder="Your mobile number" />
+  </div>
+  <div class="form-group">
+    <label for="password">New Password</label>
+    <input type="password" id="editPassword" placeholder="New password" />
+  </div>
+  <button onclick="saveProfile()">Save Changes</button>
+</div>
+
+
+<h2>Welcome, <span id="userNameDisplay"></span>!</h2>
+
+
+<script>
+    function saveProfile() {
+  const name = document.getElementById('editName').value.trim();
+  const mobile = document.getElementById('editMobile').value.trim();
+  const password = document.getElementById('editPassword').value;
+
+  if (!name || !mobile || !password) {
+    alert('All fields are required.');
+    return;
+  }
+
+  // Save to localStorage
+  localStorage.setItem('userName', name);
+  localStorage.setItem('userMobile', mobile);
+  localStorage.setItem('userPassword', password);
+
+  alert('Profile updated successfully!');
+}
+
+
+
+
+// এই কোডটি login সফল হওয়ার পরে চালাতে পারেন
+const userName = localStorage.getItem('userName') || 'User';
+document.getElementById('userNameDisplay').innerText = userName;
+
+
+</script>
+</body>
+</html>

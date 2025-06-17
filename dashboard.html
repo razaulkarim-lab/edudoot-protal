@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edudoot Portal - Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 240px;
+      background-color: #1d3557;
+      color: #fff;
+      padding: 20px;
+      flex-shrink: 0;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+      color: #f1faee;
+    }
+    .sidebar a {
+      display: block;
+      padding: 10px;
+      color: #f1faee;
+      text-decoration: none;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .sidebar a:hover {
+      background-color: #457b9d;
+    }
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      background-color: #f1faee;
+    }
+    .header {
+      background-color: #a8dadc;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .note-area textarea {
+      width: 100%;
+      height: 300px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .note-area button {
+      margin-top: 10px;
+      padding: 8px 20px;
+      background-color: #1d3557;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+    .form-container button {
+      padding: 10px 20px;
+      background-color: #1d3557;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .weather-card {
+      background: #eedbdb;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    .weather-card h3 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduPortal</h2>
+    <a onclick="loadPage('Update profile')" href="Profile full page.html">Profile</a>
+    <a onclick="loadPage('weather')">Home</a>
+    <a onclick="loadPage('booklist')" href="book/container list.html">Course Material</a>
+    <a onclick="loadPage('book')" href="book/container list.html">Book List</a>
+    <a onclick="loadPage('videos')" href="videos.html">Video Tutorials</a>
+    <a onclick="loadPage('support')" href="support.html"> Support</a>
+    <a onclick="loadPage('notes')">Notes</a>
+   
+    <a onclick="loadPage('about')" href="about.html">About</a>
+    <a onclick="loadPage('contact')" href="contuct Us.html">Contact Us</a>
+    
+    <a onclick="loadPage('login')" href="index.html">Logout</a>
+  </div>
+  <div class="main-content">
+    <div class="header">
+      <h1>Welcome to Edudoot Portal</h1>
+      <p>Your education dashboard</p>
+    </div>
+    <div id="page-content">
+      <p>Select an option from the sidebar to get started.</p>
+    </div>
+  </div>
+
+  <script>
+    function loadPage(page) {
+      if (page === 'notes') {
+        document.getElementById("page-content").innerHTML = `
+          <div class="note-area">
+            <h2>Write Your Notes</h2>
+            <textarea id="userNote"></textarea>
+            <button onclick="saveNote()">Save</button>
+          </div>
+        `;
+        const saved = localStorage.getItem('note');
+        if (saved) {
+          document.getElementById('userNote').value = saved;
+        }
+      } else if (page === 'weather') {
+        document.getElementById("page-content").innerHTML = `
+          <div class="weather-card">
+            <h2>Weather Information</h2>
+            <input type="text" id="cityInput" placeholder="Enter city name" />
+            <button onclick="getWeather()">Get Weather</button>
+            <div id="weatherResult" style="margin-top: 20px;"></div>
+          </div>
+        `;
+      } else if (page === 'login') {
+        document.getElementById("page-content").innerHTML = `
+          <div class="form-container">
+            <h2>Login</h2>
+            <div class="form-group">
+              <label for="mobile">Mobile Number</label>
+              <input type="tel" id="loginMobile" />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="loginPassword" />
+            </div>
+            <button onclick="login()">Login</button>
+            <p>New user? <a href="#" onclick="loadPage('register')">Register</a></p>
+          </div>
+        `;  
+      } 
+      
+      
+      
+ 
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      else if (page === 'register') {
+        document.getElementById("page-content").innerHTML = `
+          <div class="form-container">
+            <h2>Register</h2>
+            <div class="form-group">
+              <label for="mobile">Mobile Number</label>
+              <input type="tel" id="regMobile" />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="regPassword" />
+            </div>
+            <button onclick="register()">Register</button>
+          </div>
+        `;
+      } else {
+        document.getElementById("page-content").innerHTML = `<h2>${page.toUpperCase()}</h2><p>Content for ${page} will appear here.</p>`;
+      }
+    }
+
+    function getWeather() {
+      const apiKey = 'e34d7e6a556f8c0845240e60d82e1df5';
+      const city = document.getElementById('cityInput').value.trim();
+      const resultDiv = document.getElementById('weatherResult');
+
+      if (!city) {
+        resultDiv.innerHTML = '<p>Please enter a city name.</p>';
+        return;
+      }
+
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('City not found');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const temp = data.main.temp;
+          const condition = data.weather[0].description;
+          const humidity = data.main.humidity;
+          const windSpeed = data.wind.speed;
+
+          resultDiv.innerHTML = `
+            <h3>${data.name}, ${data.sys.country}</h3>
+            <p><strong>Temperature:</strong> ${temp} °C</p>
+            <p><strong>Condition:</strong> ${condition}</p>
+            <p><strong>Humidity:</strong> ${humidity}%</p>
+            <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
+          `;
+        })
+        .catch(error => {
+          resultDiv.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+        });
+    }
+
+    function saveNote() {
+      const note = document.getElementById('userNote').value;
+      localStorage.setItem('note', note);
+      alert('Note saved!');
+    }
+
+    function register() {
+      const mobile = document.getElementById('regMobile').value;
+      const password = document.getElementById('regPassword').value;
+      if (mobile && password) {
+        localStorage.setItem('userMobile', mobile);
+        localStorage.setItem('userPassword', password);
+        alert('Registered successfully! You can now login.');
+        loadPage('login');
+      } else {
+        alert('Please fill out all fields.');
+      }
+    }
+
+    function login() {
+      const mobile = document.getElementById('loginMobile').value;
+      const password = document.getElementById('loginPassword').value;
+      const savedMobile = localStorage.getItem('userMobile');
+      const savedPassword = localStorage.getItem('userPassword');
+      if (mobile === savedMobile && password === savedPassword) {
+        alert('Login successful!');
+        loadPage('home');
+      } else {
+        alert('Invalid mobile number or password.');
+      }
+    }
+  </script>
+</body>
+</html>

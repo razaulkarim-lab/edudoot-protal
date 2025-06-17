@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Profile</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: #f1faee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+       
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1d3557;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1d3557;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #457b9d;
+    }
+
+    .message {
+      margin-top: 10px;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Edit Profile</h2>
+    <div class="form-group">
+      <label for="editName">Name</label>
+      <input type="text" id="editName" placeholder="Enter your name" />
+    </div>
+    <div class="form-group">
+      <label for="editMobile">Mobile Number</label>
+      <input type="tel" id="editMobile" placeholder="Enter your mobile number" />
+    </div>
+    <div class="form-group">
+      <label for="editPassword">New Password</label>
+      <input type="password" id="editPassword" placeholder="Enter new password" />
+    </div>
+    <button onclick="saveProfile()">Save Changes</button>
+    <div class="message" id="saveMsg"></div>
+
+
+    <h2>Welcome, <span id="userNameDisplay"></span>!</h2>
+  </div>
+
+
+
+
+
+
+  <script>
+    // Load saved profile (optional)
+    window.onload = () => {
+      document.getElementById('editName').value = localStorage.getItem('userName') || '';
+      document.getElementById('editMobile').value = localStorage.getItem('userMobile') || '';
+      document.getElementById('editPassword').value = localStorage.getItem('userPassword') || '';
+    };
+
+    function saveProfile() {
+      const name = document.getElementById('editName').value.trim();
+      const mobile = document.getElementById('editMobile').value.trim();
+      const password = document.getElementById('editPassword').value.trim();
+
+      if (!name || !mobile || !password) {
+        alert('All fields are required.');
+        return;
+      }
+
+      // Save to localStorage
+      localStorage.setItem('userName', name);
+      localStorage.setItem('userMobile', mobile);
+      localStorage.setItem('userPassword', password);
+
+      document.getElementById('saveMsg').innerText = 'Profile updated successfully!';
+    }
+
+
+
+
+    // এই কোডটি login সফল হওয়ার পরে চালাতে পারেন
+const userName = localStorage.getItem('userName') || 'User';
+document.getElementById('userNameDisplay').innerText = userName;
+
+
+  </script>
+</body>
+</html>

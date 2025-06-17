@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register - EduPortal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 320px;
+      text-align: center;
+    }
+    h2 {
+      color: #1d3557;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px 0;
+      font-weight: 600;
+      color: #333;
+      text-align: left;
+    }
+    input[type="tel"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 16px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      transition: border-color 0.3s ease;
+    }
+    input[type="tel"]:focus,
+    input[type="password"]:focus {
+      border-color: #457b9d;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      background-color: #1d3557;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 17px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #457b9d;
+    }
+    .switch-text {
+      margin-top: 18px;
+      font-size: 14px;
+      color: #555;
+    }
+    .switch-text a {
+      color: #1d3557;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .switch-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Register</h2>
+  <label for="regMobile">Mobile Number</label>
+  <input type="tel" id="regMobile" placeholder="Enter mobile number" />
+
+  <label for="regPassword">Password</label>
+  <input type="password" id="regPassword" placeholder="Enter password" />
+
+  <button onclick="register()">Register</button>
+
+  <p class="switch-text">
+    Already have an account? <a href="login.html">Login here</a>
+  </p>
+</div>
+
+<script>
+  function register() {
+    const mobile = document.getElementById('regMobile').value.trim();
+    const password = document.getElementById('regPassword').value.trim();
+    if (mobile === '' || password === '') {
+      alert('Please fill all fields');
+      return;
+    }
+    localStorage.setItem('userMobile', mobile);
+    localStorage.setItem('userPassword', password);
+    alert('Registration successful! Please login.');
+    window.location.href = 'index.html'; // Registration এর পর লগইন পেজে নিয়ে যায়
+  }
+</script>
+
+</body>
+</html>

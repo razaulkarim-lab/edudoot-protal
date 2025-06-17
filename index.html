@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login - EduPortal</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .card {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 320px;
+    text-align: center;
+  }
+  h2 {
+    color: #1d3557;
+    margin-bottom: 25px;
+  }
+  label {
+    display: block;
+    margin: 12px 0 6px 0;
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+  }
+  input[type="tel"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+  }
+  input[type="tel"]:focus,
+  input[type="password"]:focus {
+    border-color: #457b9d;
+    outline: none;
+  }
+  button {
+    width: 100%;
+    background-color: #1d3557;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 17px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #457b9d;
+  }
+  .switch-text {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #555;
+  }
+  .switch-text a {
+    color: #1d3557;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .switch-text a:hover {
+    text-decoration: underline;
+  }
+  .show-pass {
+    margin-top: 8px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+
+</style>
+</head>
+<body>
+
+  
+  
+
+<div class="card">
+
+    <h2>Welcome to Edudoot Portal</h2>
+      
+  <h2>Login</h2>
+  <label for="loginMobile">Mobile Number</label>
+  <input type="tel" id="loginMobile" placeholder="Enter mobile number" />
+
+  <label for="loginPassword">Password</label>
+  <input type="password" id="loginPassword" placeholder="Enter password" />
+
+ 
+
+  <button onclick="login()">Login</button>
+
+  <p class="switch-text">
+    New user? <a href="register.html">Register here</a>
+  </p>
+</div>
+
+<script>
+  function togglePassword(passId, checkboxId) {
+    const passInput = document.getElementById(passId);
+    const checkbox = document.getElementById(checkboxId);
+    if (checkbox.checked) {
+      passInput.type = 'text';
+    } else {
+      passInput.type = 'password';
+    }
+  }
+
+  function login() {
+    const mobile = document.getElementById('loginMobile').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    const savedMobile = localStorage.getItem('userMobile');
+    const savedPassword = localStorage.getItem('userPassword');
+    if (mobile === savedMobile && password === savedPassword) {
+      alert('Login successful!');
+      // এখানে ড্যাশবোর্ড বা অন্য পেজে রিডাইরেক্ট করতে পারেন
+       window.location.href = "dashboard.html";
+    } else {
+      alert('Invalid mobile number or password.');
+    }
+  }
+</script>
+
+</body>
+</html>
